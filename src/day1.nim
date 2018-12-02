@@ -1,11 +1,8 @@
-import strutils
+import strutils, sequtils, math, intsets
 
 
-proc day1task1*(path: string): int =
+proc day1task1*(path: string): int = sum readFile(path).splitLines().mapIt(parseInt(it))
   ## Count the sum of integers in a file (number per line).
-
-  for line in lines(path):
-    result += parseInt(line)
 
 proc day1task2*(path: string): int =
   ##[
@@ -15,11 +12,11 @@ proc day1task2*(path: string): int =
     When the end of the file is reached, start from the beginning preserving the sum so far.
   ]##
 
-  let steps = readFile(path).splitLines()
-  var history: seq[int] = @[0]
+  let steps = readFile(path).splitLines().mapIt(parseInt(it))
+  var history = initIntSet(); history.incl 0
 
   while true:
     for step in steps:
-      result += parseInt(step)
+      result += step
       if result in history: return
-      history.add result
+      history.incl result

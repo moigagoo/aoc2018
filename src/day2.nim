@@ -18,7 +18,7 @@ proc day2task1*(path: string): int =
   doubles * triples
 
 
-func differByTwoChars(s1, s2: string): bool =
+func differByOneChar(s1, s2: string): bool =
   var diffChars: Natural = 0
 
   for pair in zip(s1, s2):
@@ -46,7 +46,7 @@ proc day2task2*(path: string): string =
 
   for line in lines(path):
     for visitedLine in history:
-      if differByTwoChars(line, visitedLine):
+      if differByOneChar(line, visitedLine):
         correctIds.add line
         correctIds.add visitedLine
 
